@@ -134,9 +134,9 @@ In particular:
   category, and the owner accounts RubyGems lists for it. `check` verifies
   that it lists exactly the locked gems. Every gem is runtime. There is no
   build step, and the test tooling is already in the runtime tree.
-- **Hermetic build.** Measured 2026-10-05: a clean copy of the tree was
-  installed with `bundle install --local` in a container with
-  `--network=none`, holding only the toolchain (Ubuntu 26.04's `ruby`,
+- **Hermetic build.** Measured 2026-10-05 at commit `f43529e`: a clean
+  `git clone` was installed with `bundle install --local` in a container
+  with `--network=none`, holding only the toolchain (Ubuntu 26.04's `ruby`,
   `ruby-dev`, `ruby-bundler`, `build-essential`, `libpq-dev`, and
   `libyaml-dev`). It installed, and Rails, `pg`, and nokogiri loaded.
   Installing twice at the same path gave byte-identical native extensions

@@ -1,0 +1,21 @@
+<% f = row.field; ro = row.readonly || readonly %>
+<label class="field<%= ' check' if f.type == 'bool' %>">
+  <% if f.type == "bool" %>
+  <input type="checkbox" name="<%= f.name %>"<%= ' checked' if row.value == true %><%= ' disabled' if ro %>> <%= f.label %>
+  <% else %>
+  <span><%= f.label %><% if f.required %> <span class="req" aria-hidden="true">*</span><% end %></span>
+  <% if %w[select ref].include?(f.type) %>
+  <select name="<%= f.name %>"<%= ' disabled' if ro %><%= ' required' if f.required %>>
+    <%= options(row.choices, row.value, blank: f.required ? "Choose…" : "None") %>
+  </select>
+  <% elsif f.type == "textarea" %>
+  <textarea name="<%= f.name %>" rows="4"<%= ' readonly' if ro %>><%= row.value %></textarea>
+  <% else %>
+  <input name="<%= f.name %>" value="<%= row.value %>"<%= ' readonly' if ro %><%= ' required' if f.required %>
+    <%= raw({ "date" => 'type="date"', "email" => 'type="email"', "password" => 'type="password" autocomplete="new-password"',
+              "decimal" => 'inputmode="decimal" class="num" pattern="-?[0-9]*\.?[0-9]*"',
+              "int" => 'inputmode="numeric" class="num"' }.fetch(f.type, 'type="text"')) %>>
+  <% end %>
+  <% end %>
+  <% if f.help %><small class="muted"><%= f.help %></small><% end %>
+</label>

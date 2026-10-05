@@ -1,0 +1,34 @@
+<div class="pagehead"><h1><%= @title %></h1></div>
+<form method="post" class="card form wide" id="docform">
+  <%= form_token_field %>
+  <div class="columns">
+    <% header.rows.each do |row| %><%= render "ui/field", row:, readonly: false %><% end %>
+  </div>
+  <h2>Lines</h2>
+  <div class="tablewrap">
+  <table class="grid lines" id="lines">
+    <thead><tr>
+      <th>Product</th><th>Description *</th><th class="num">Quantity</th><th class="num"><%= kind.sales ? "Unit price" : "Unit cost" %></th>
+      <th><%= kind.sales ? "Revenue account" : "Expense account" %></th><th>Tax code</th><th class="num">Tax %</th>
+      <th class="num">Subtotal</th><th class="num">Tax</th><th class="num">Total</th><th></th>
+    </tr></thead>
+    <tbody>
+    <% lines.each do |l| %><%= render "ui/line_row", l:, product_choices:, account_choices:, tax_choices: %><% end %>
+    </tbody>
+  </table>
+  </div>
+  <template id="line-template"><%= render "ui/line_row", l: {}, product_choices:, account_choices:, tax_choices: %></template>
+  <div class="actions"><button type="button" id="add-line">Add line</button>
+    <% if kind.order? %><span class="muted">Order quantities must be greater than zero.</span><% end %></div>
+  <table class="totals">
+    <tr><td>Subtotal</td><td class="num" id="sum-subtotal"></td></tr>
+    <tr><td>Tax</td><td class="num" id="sum-tax"></td></tr>
+    <tr><td><strong>Total</strong></td><td class="num"><strong id="sum-total"></strong></td></tr>
+  </table>
+  <% if error %><p class="error" role="alert"><%= error %></p><% end %>
+  <div class="actions">
+    <button class="primary">Save draft</button>
+    <a class="button" href="<%= back %>">Cancel</a>
+  </div>
+</form>
+<script type="application/json" id="client-data"><%= raw json_escape(client_data.to_json) %></script>

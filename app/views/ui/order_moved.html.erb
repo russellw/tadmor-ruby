@@ -1,0 +1,6 @@
+<div class="pagehead"><h1><%= @title %></h1></div>
+<div class="card">
+  <p class="notice">Created <%= pluralize(movements.size, "draft stock movement") %>. Post each one to record it in the ledger.</p>
+  <ul><% movements.each do |m| %><li><a href="/stock-movements/<%= m %>">Stock movement <%= m %></a></li><% end %></ul>
+  <p><a href="<%= back %>">Back to the order</a></p>
+</div>

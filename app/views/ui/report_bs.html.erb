@@ -1,0 +1,15 @@
+<div class="pagehead"><h1>Balance sheet</h1></div>
+<%= render "ui/report_filters", filters:, error: %>
+<div class="tablewrap"><table class="grid">
+  <thead><tr><th>Code</th><th>Account</th><th class="num">Amount</th></tr></thead>
+  <tbody>
+    <% [%w[asset Assets], %w[liability Liabilities], %w[equity Equity]].each do |type, heading| %>
+    <tr class="section"><td colspan="3"><%= heading %></td></tr>
+    <%= render "ui/report_rows", rows: sections[type] %>
+    <tr class="subtotal"><td colspan="2">Total <%= heading.downcase %></td><td class="num"><%= amount(totals[type]) %></td></tr>
+    <% end %>
+    <tr><td colspan="2">Current earnings (revenue less expenses not yet closed to equity)</td><td class="num"><%= money_span(earnings) %></td></tr>
+  </tbody>
+  <tfoot><tr><td colspan="2">Liabilities + equity + current earnings</td><td class="num"><%= amount(liabilities_and_equity) %></td></tr></tfoot>
+</table></div>
+<p class="muted">Assets (<%= amount(totals["asset"]) %>) equal liabilities, equity, and current earnings (<%= amount(liabilities_and_equity) %>).</p>

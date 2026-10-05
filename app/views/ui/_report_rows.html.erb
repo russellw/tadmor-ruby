@@ -1,0 +1,2 @@
+<% rows.each do |r| %><tr><td><a href="/accounts/<%= r["account_id"] %>/ledger"><%= r["code"] %></a></td><td><%= r["name"] %></td><td class="num"><%= money_span(r["amount"]) %></td></tr>
+<% end %><% if rows.empty? %><tr><td colspan="3" class="muted">No activity.</td></tr><% end %>

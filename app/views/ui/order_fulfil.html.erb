@@ -1,0 +1,29 @@
+<% verb = billing ? kind.bill_verb : kind.move_verb %>
+<div class="pagehead"><h1><%= @title %></h1></div>
+<form method="post" class="card form wide">
+  <%= form_token_field %>
+  <div class="columns">
+  <% if billing %>
+    <label class="field"><span><%= number_label %> <span class="req">*</span></span><input name="number" value="<%= values["number"] %>" required></label>
+    <label class="field"><span><%= date_label %> <span class="req">*</span></span><input type="date" name="date" value="<%= values["date"] %>" required></label>
+    <label class="field"><span>Due date</span><input type="date" name="due_date" value="<%= values["due_date"] %>"></label>
+  <% else %>
+    <label class="field"><span>Warehouse <span class="req">*</span></span><select name="warehouse_id" required><%= options(warehouses, values["warehouse_id"], blank: "Choose…") %></select></label>
+    <label class="field"><span>Date</span><input type="date" name="movement_date" value="<%= values["movement_date"] %>"></label>
+    <label class="field"><span>Reference</span><input name="reference" value="<%= values["reference"] %>"></label>
+  <% end %>
+  </div>
+  <h2><%= billing ? "Lines to #{verb}" : "Stocked lines to #{verb}" %></h2>
+  <% if rows.any? %>
+  <div class="tablewrap"><table class="grid lines">
+    <thead><tr><th>#</th><th>Description</th><th class="num">Ordered</th><th class="num">Remaining</th><th class="num">This time</th></tr></thead>
+    <tbody><% rows.each do |r| %><tr><td><%= r["line_no"] %></td><td><%= r["description"] %></td><td class="num"><%= qty(r["quantity"]) %></td>
+      <td class="num"><%= qty(r["remaining"]) %></td>
+      <td><input name="qty_<%= r["order_line_id"] %>" class="num narrow" inputmode="decimal" value="<%= r["chosen"] %>"></td></tr><% end %></tbody>
+  </table></div>
+  <p class="muted">Lower a quantity for a partial <%= verb %>; quantities above what remains are capped.</p>
+  <% else %><p class="empty">Nothing remains to <%= verb %>.</p><% end %>
+  <% if error %><p class="error" role="alert"><%= error %></p><% end %>
+  <div class="actions"><button class="primary"><%= billing ? "Create draft #{kind.sales ? 'invoice' : 'bill'}" : "Create draft movements" %></button>
+    <a class="button" href="<%= back %>">Cancel</a></div>
+</form>

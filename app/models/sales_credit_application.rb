@@ -1,0 +1,2 @@
+class SalesCreditApplication < ApplicationRecord
+end

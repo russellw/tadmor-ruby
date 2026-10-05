@@ -1,0 +1,11 @@
+<tr class="line">
+  <td><select name="line_product_id[]" class="product"><%= options(product_choices, l["product_id"], blank: "—") %></select></td>
+  <td><input name="line_description[]" class="desc" value="<%= l["description"] %>"></td>
+  <td><input name="line_quantity[]" class="num narrow qty" inputmode="decimal" value="<%= l["quantity"] || "1" %>"></td>
+  <td><input name="line_price[]" class="num narrow price" inputmode="decimal" value="<%= l["price"] %>"></td>
+  <td><select name="line_account[]" class="account"><%= options(account_choices, l["account"], blank: "Product default") %></select></td>
+  <td><select name="line_tax_code[]" class="taxcode"><%= options(tax_choices.map { |v, _| [v, v] }, l["tax_code"], blank: "—") %></select></td>
+  <td><input name="line_tax_rate[]" class="num narrow rate" inputmode="decimal" value="<%= l["tax_rate"] || "0" %>"></td>
+  <td class="num out-subtotal"></td><td class="num out-tax"></td><td class="num out-total"></td>
+  <td><button type="button" class="link remove">Remove</button></td>
+</tr>

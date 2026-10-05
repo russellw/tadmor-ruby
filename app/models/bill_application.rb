@@ -1,0 +1,2 @@
+class BillApplication < ApplicationRecord
+end

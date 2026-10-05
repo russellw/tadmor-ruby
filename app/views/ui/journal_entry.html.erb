@@ -1,0 +1,19 @@
+<div class="pagehead"><h1>Journal entry <%= e["id"] %> <%= pill(e["status"]) %></h1></div>
+<div class="card"><dl class="facts">
+  <dt>Date</dt><dd><%= e["entry_date"] %></dd>
+  <dt>Currency</dt><dd><%= e["currency_code"] %></dd>
+  <dt>Exchange rate</dt><dd><%= e["exchange_rate"] %></dd>
+  <dt>Reference</dt><dd><%= dash(e["reference"]) %></dd>
+  <dt>Memo</dt><dd><%= dash(e["memo"]) %></dd>
+  <% if e["reverses_entry_id"] %><dt>Reverses</dt><dd><a href="/journal-entries/<%= e["reverses_entry_id"] %>">Entry <%= e["reverses_entry_id"] %></a></dd><% end %>
+  <% if e["is_closing"] %><dt>Kind</dt><dd>Year-end closing entry</dd><% end %>
+</dl></div>
+<h2>Lines</h2>
+<div class="tablewrap"><table class="grid">
+  <thead><tr><th>#</th><th>Account</th><th>Memo</th><th class="num">Debit</th><th class="num">Credit</th><th class="num">Base debit</th><th class="num">Base credit</th></tr></thead>
+  <tbody><% e["lines"].each do |l| %><tr>
+    <td><%= l["line_no"] %></td><td><a href="/accounts/<%= l["account_id"] %>/ledger"><%= l["account_code"] %> <%= l["account_name"] %></a></td><td><%= l["memo"] %></td>
+    <td class="num"><%= amount(l["debit"]) %></td><td class="num"><%= amount(l["credit"]) %></td><td class="num"><%= amount(l["base_debit"]) %></td><td class="num"><%= amount(l["base_credit"]) %></td>
+  </tr><% end %></tbody>
+  <tfoot><tr><td colspan="3">Totals</td><td class="num"><%= amount(totals["debit"]) %></td><td class="num"><%= amount(totals["credit"]) %></td><td class="num"><%= amount(totals["base_debit"]) %></td><td class="num"><%= amount(totals["base_credit"]) %></td></tr></tfoot>
+</table></div>

@@ -1,0 +1,10 @@
+<details<%= ' open' if errors[:email] || email_result %>>
+  <summary>Email</summary>
+  <form method="post" action="<%= url %>" class="actions mt-s">
+    <%= form_token_field %>
+    <input class="wide-input" name="to" placeholder="Recipients, comma separated (blank: the counterparty's email on file)">
+    <button>Send</button>
+  </form>
+  <% if errors[:email] %><p class="error" role="alert"><%= errors[:email] %></p><% end %>
+  <% if email_result %><p class="notice" role="status">Sent to <%= email_result.join(", ") %>.</p><% end %>
+</details>

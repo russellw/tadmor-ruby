@@ -1,0 +1,13 @@
+<div class="pagehead"><h1><%= @title %></h1></div>
+<form method="post" class="card form">
+  <%= form_token_field %>
+  <% if readonly %><p class="muted">Only administrators can change these.</p><% end %>
+  <% if notice %><p class="notice" role="status"><%= notice %></p><% end %>
+  <% form.rows.each do |row| %><%= render "ui/field", row:, readonly: %><% end %>
+  <% if error %><p class="error" role="alert"><%= error %></p><% end %>
+  <div class="actions">
+    <% unless readonly %><button class="primary">Save</button><% end %>
+    <a class="button" href="<%= back %>"><%= readonly ? "Back" : "Cancel" %></a>
+  </div>
+</form>
+<% if below %><%= below %><% end %>

@@ -1,0 +1,6 @@
+<form method="get" class="filters">
+  <% filters.each do |name, text| %><label><%= text %> <input type="date" name="<%= name %>" value="<%= params[name] %>"></label><% end %>
+  <button>Show</button>
+  <span class="muted">Leave a date blank for no bound.</span>
+</form>
+<% if error %><p class="error" role="alert"><%= error %></p><% end %>

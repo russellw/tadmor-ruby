@@ -1,0 +1,723 @@
+{
+  "format": "tadmor-dependencies/1",
+  "generator": "tools/vendor.rb manifest (tadmor-ruby)",
+  "platform": "linux/x64",
+  "toolchains": [
+    "Ruby (the operating system's build), with RubyGems and Bundler",
+    "the operating system's C compiler and libpq, for native extensions"
+  ],
+  "packages": [
+    {
+      "ecosystem": "rubygems",
+      "name": "actionpack",
+      "version": "8.1.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/actionpack/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "actionview",
+      "version": "8.1.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/actionview/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "activemodel",
+      "version": "8.1.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/activemodel/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "activerecord",
+      "version": "8.1.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/activerecord/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "activesupport",
+      "version": "8.1.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/activesupport/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "base64",
+      "version": "0.3.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/base64/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "bigdecimal",
+      "version": "4.1.3",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:mrkn",
+        "rubygems:zzak"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/bigdecimal/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "builder",
+      "version": "3.3.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:htonl",
+        "rubygems:jeremydaer",
+        "rubygems:jimweirich",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove",
+        "rubygems:webster132"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/builder/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "concurrent-ruby",
+      "version": "1.3.8",
+      "category": "runtime",
+      "identities": [
+        "rubygems:",
+        "rubygems:chrisseaton",
+        "rubygems:eregon",
+        "rubygems:jdantonio",
+        "rubygems:pitr-ch"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/concurrent-ruby/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "connection_pool",
+      "version": "3.0.2",
+      "category": "runtime",
+      "identities": [
+        "rubygems:djanowski",
+        "rubygems:mperham"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/connection_pool/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "crass",
+      "version": "1.0.7",
+      "category": "runtime",
+      "identities": [
+        "rubygems:rgrove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/crass/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "csv",
+      "version": "3.3.6",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:kou",
+        "rubygems:mrkn",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/csv/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "drb",
+      "version": "2.2.3",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:kou",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/drb/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "erb",
+      "version": "6.0.7",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:hsbt",
+        "rubygems:k0kubun",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/erb/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "erubi",
+      "version": "1.13.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:jeremyevans"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/erubi/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "i18n",
+      "version": "1.15.2",
+      "category": "runtime",
+      "identities": [
+        "rubygems:Tigrish",
+        "rubygems:arkanis",
+        "rubygems:cantoniodasilva",
+        "rubygems:clemensk",
+        "rubygems:matt_a",
+        "rubygems:ryanbigg",
+        "rubygems:saimon",
+        "rubygems:sfuchs",
+        "rubygems:svenfuchs"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/i18n/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "io-console",
+      "version": "0.9.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:nobu"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/io-console/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "irb",
+      "version": "1.18.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:aycabta",
+        "rubygems:hasumikin",
+        "rubygems:hsbt",
+        "rubygems:ima1zumi",
+        "rubygems:k0kubun",
+        "rubygems:naruse",
+        "rubygems:st0012",
+        "rubygems:tompng"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/irb/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "json",
+      "version": "3.0.2",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:flori",
+        "rubygems:headius",
+        "rubygems:hsbt",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/json/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "logger",
+      "version": "1.7.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:naruse",
+        "rubygems:sonots"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/logger/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "loofah",
+      "version": "2.25.2",
+      "category": "runtime",
+      "identities": [
+        "rubygems:brynary",
+        "rubygems:flavorjones"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/loofah/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "mini_portile2",
+      "version": "2.8.9",
+      "category": "runtime",
+      "identities": [
+        "rubygems:flavorjones",
+        "rubygems:larskanis",
+        "rubygems:luislavena"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/mini_portile2/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "minitest",
+      "version": "6.0.6",
+      "category": "runtime",
+      "identities": [
+        "rubygems:zenspider"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/minitest/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "net-protocol",
+      "version": "0.4.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/net-protocol/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "net-smtp",
+      "version": "0.5.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:knu",
+        "rubygems:tommy"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/net-smtp/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "nio4r",
+      "version": "2.7.5",
+      "category": "runtime",
+      "identities": [
+        "rubygems:ioquatix",
+        "rubygems:tarcieri"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/nio4r/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "nokogiri",
+      "version": "1.19.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:flavorjones",
+        "rubygems:knu",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/nokogiri/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "pg",
+      "version": "1.6.3",
+      "category": "runtime",
+      "identities": [
+        "rubygems:ged",
+        "rubygems:jdavis",
+        "rubygems:larskanis"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/pg/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "pp",
+      "version": "0.6.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/pp/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "prettyprint",
+      "version": "0.2.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/prettyprint/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "prism",
+      "version": "1.9.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:eileencodes",
+        "rubygems:jemmaissroff",
+        "rubygems:kddnewton",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/prism/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "puma",
+      "version": "8.0.2",
+      "category": "runtime",
+      "identities": [
+        "rubygems:evan",
+        "rubygems:nateberkopec",
+        "rubygems:schneems"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/puma/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "racc",
+      "version": "1.8.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:drbrain",
+        "rubygems:flavorjones",
+        "rubygems:hsbt",
+        "rubygems:tenderlove",
+        "rubygems:yui-knk",
+        "rubygems:zenspider"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/racc/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rack",
+      "version": "3.2.7",
+      "category": "runtime",
+      "identities": [
+        "rubygems:chneukirchen",
+        "rubygems:eileencodes",
+        "rubygems:ioquatix",
+        "rubygems:rafaelfranca",
+        "rubygems:raggi",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rack/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rack-session",
+      "version": "2.1.2",
+      "category": "runtime",
+      "identities": [
+        "rubygems:ioquatix",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rack-session/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rack-test",
+      "version": "2.2.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:ioquatix",
+        "rubygems:jeremyevans"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rack-test/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rackup",
+      "version": "2.3.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:ioquatix"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rackup/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rails-dom-testing",
+      "version": "2.3.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jeremydaer",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove",
+        "rubygems:webster132"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rails-dom-testing/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rails-html-sanitizer",
+      "version": "1.7.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:flavorjones",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jeremydaer",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove",
+        "rubygems:webster132"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rails-html-sanitizer/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "railties",
+      "version": "8.1.4",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:eileencodes",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jeremydaer",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:tenderlove",
+        "rubygems:webster132"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/railties/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rake",
+      "version": "13.4.2",
+      "category": "runtime",
+      "identities": [
+        "rubygems:drbrain",
+        "rubygems:hsbt",
+        "rubygems:jimweirich"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rake/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rbs",
+      "version": "4.2.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:mame",
+        "rubygems:soutaro"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rbs/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "rdoc",
+      "version": "8.0.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:aycabta",
+        "rubygems:colby-swandale",
+        "rubygems:drbrain",
+        "rubygems:hsbt",
+        "rubygems:st0012",
+        "rubygems:zzak"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/rdoc/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "reline",
+      "version": "0.7.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:aycabta",
+        "rubygems:hasumikin",
+        "rubygems:hsbt",
+        "rubygems:ima1zumi",
+        "rubygems:k0kubun",
+        "rubygems:st0012",
+        "rubygems:tompng"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/reline/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "securerandom",
+      "version": "0.4.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/securerandom/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "thor",
+      "version": "1.5.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:byroot",
+        "rubygems:cantoniodasilva",
+        "rubygems:fxn",
+        "rubygems:guilleiguaran",
+        "rubygems:jeremydaer",
+        "rubygems:jhawthorn",
+        "rubygems:kamipo",
+        "rubygems:matthewd",
+        "rubygems:rafaelfranca",
+        "rubygems:webster132"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/thor/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "timeout",
+      "version": "0.6.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/timeout/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "tsort",
+      "version": "0.2.0",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt",
+        "rubygems:naruse"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/tsort/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "tzinfo",
+      "version": "2.0.6",
+      "category": "runtime",
+      "identities": [
+        "rubygems:PhilRoss"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/tzinfo/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "uri",
+      "version": "1.1.1",
+      "category": "runtime",
+      "identities": [
+        "rubygems:hsbt"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/uri/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "useragent",
+      "version": "0.16.11",
+      "category": "runtime",
+      "identities": [
+        "rubygems:gshutler",
+        "rubygems:qrush"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/useragent/owners.json"
+    },
+    {
+      "ecosystem": "rubygems",
+      "name": "zeitwerk",
+      "version": "2.8.3",
+      "category": "runtime",
+      "identities": [
+        "rubygems:fxn"
+      ],
+      "evidence": "https://rubygems.org/api/v1/gems/zeitwerk/owners.json"
+    }
+  ],
+  "sources": [
+    {
+      "label": "RubyGems vendor/cache (runtime, unpacked)",
+      "bytes": 35736571,
+      "lines": 821501
+    }
+  ]
+}

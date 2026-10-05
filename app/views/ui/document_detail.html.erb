@@ -1,0 +1,74 @@
+<% cur = doc["currency_code"]; status_field = doc[kind.status_field] %>
+<div class="pagehead">
+  <h1><%= kind.label %> <%= doc[kind.number] %> <%= pill(doc["status"]) %> <%= pill(status_field) %></h1>
+  <a class="button" href="/api/<%= c %>/<%= doc["id"] %>/pdf" target="_blank" rel="noopener">PDF</a>
+</div>
+
+<div class="columns">
+  <div class="card">
+    <dl class="facts">
+      <dt><%= kind.sales ? "Customer" : "Supplier" %></dt><dd><a href="<%= party_url %>"><%= party %></a></dd>
+      <dt>Date</dt><dd><%= doc[kind.date] %></dd>
+      <% if kind.due_date %><dt>Due date</dt><dd><%= dash(doc["due_date"]) %></dd><% end %>
+      <dt>Currency</dt><dd><%= cur %></dd>
+      <dt>Reference</dt><dd><%= dash(doc["reference"]) %></dd>
+      <dt>Memo</dt><dd><%= doc["memo"].present? ? simple_format(doc["memo"], {}, wrapper_tag: "span") : "—" %></dd>
+      <dt>Journal entry</dt><dd><% if doc["journal_entry_id"] %><a href="/journal-entries/<%= doc["journal_entry_id"] %>">Entry <%= doc["journal_entry_id"] %></a><% else %>—<% end %></dd>
+    </dl>
+  </div>
+  <div class="card">
+    <table class="totals full">
+      <tr><td>Subtotal</td><td class="num"><%= cur %> <%= amount(subtotal) %></td></tr>
+      <tr><td>Tax</td><td class="num"><%= cur %> <%= amount(tax_total) %></td></tr>
+      <tr><td><strong>Total</strong></td><td class="num"><strong><%= cur %> <%= amount(doc["total"]) %></strong></td></tr>
+      <tr><td><%= kind.credit ? "Applied" : "Paid or credited" %></td><td class="num"><%= cur %> <%= amount(doc["amount_applied"]) %></td></tr>
+      <tr><td><strong><%= kind.credit ? "Unapplied" : "Balance" %></strong></td><td class="num"><strong><%= cur %> <%= amount(doc["balance"]) %></strong></td></tr>
+    </table>
+  </div>
+</div>
+
+<h2>Actions</h2>
+<div class="card">
+  <div class="actions">
+    <% if doc["status"] == "draft" %>
+      <%= action_button "Post", "/#{c}/#{doc["id"]}/post", "primary" %>
+      <% if order_linked %><span class="muted">Produced from an order: delete it to return the quantities, but it cannot be edited.</span>
+      <% else %><a class="button" href="/<%= c %>/<%= doc["id"] %>/edit">Edit</a><% end %>
+      <a class="button" href="/<%= c %>/<%= doc["id"] %>/delete">Delete</a>
+    <% elsif doc["status"] == "posted" %>
+      <% if can_apply %><%= action_button "Apply to open #{kind.sales ? 'invoices' : 'bills'}", "/#{c}/#{doc["id"]}/apply", "primary" %><% end %>
+      <% if current_user.is_admin %><%= action_button "Unpost", "/#{c}/#{doc["id"]}/unpost" %><% end %>
+    <% end %>
+  </div>
+  <%= render "ui/action_errors", errors: %>
+  <%= render "ui/email_box", url: "/#{c}/#{doc["id"]}/email", errors:, email_result: %>
+</div>
+
+<h2>Lines</h2>
+<div class="tablewrap"><table class="grid">
+  <thead><tr><th>#</th><th>Description</th><th class="num">Quantity</th><th class="num"><%= kind.sales ? "Unit price" : "Unit cost" %></th>
+    <th>Tax code</th><th class="num">Tax %</th><th class="num">Subtotal</th><th class="num">Tax</th><th class="num">Total</th></tr></thead>
+  <tbody>
+  <% lines.each do |l| %><tr>
+    <td><%= l["line_no"] %></td><td><%= l["description"] %></td><td class="num"><%= qty(l["quantity"]) %></td>
+    <td class="num"><%= amount(l[kind.lines.price]) %></td><td><%= dash(l["tax_code"]) %></td><td class="num"><%= qty(l["tax_rate"]) %></td>
+    <td class="num"><%= amount(l["line_subtotal"]) %></td><td class="num"><%= amount(l["tax_amount"]) %></td><td class="num"><%= amount(l["line_total"]) %></td>
+  </tr><% end %>
+  <% if lines.empty? %><tr><td colspan="9" class="empty">No lines.</td></tr><% end %>
+  </tbody>
+  <tfoot><tr><td colspan="6">Totals (<%= cur %>)</td><td class="num"><%= amount(subtotal) %></td><td class="num"><%= amount(tax_total) %></td><td class="num"><%= amount(doc["total"]) %></td></tr></tfoot>
+</table></div>
+
+<% if kind.credit %>
+<h2>Applied to</h2>
+<% if applied.any? %>
+<div class="tablewrap"><table class="grid"><thead><tr><th><%= kind.sales ? "Invoice" : "Bill" %></th><th class="num">Amount applied</th></tr></thead>
+<tbody><% applied.each do |a| %><tr><td><a href="<%= a["url"] %>"><%= a["document_number"] %></a></td><td class="num"><%= cur %> <%= amount(a["amount_applied"]) %></td></tr><% end %></tbody></table></div>
+<% else %><p class="empty">Not applied to anything yet.</p><% end %>
+<% else %>
+<h2>Payments and credits applied</h2>
+<% if applied.any? %>
+<div class="tablewrap"><table class="grid"><thead><tr><th>Document</th><th>Date</th><th>Status</th><th class="num">Amount applied</th></tr></thead>
+<tbody><% applied.each do |a| %><tr><td><a href="<%= a["url"] %>"><%= a["label"] %></a></td><td><%= a["date"].iso8601 %></td><td><%= pill(a["status"]) %></td><td class="num"><%= cur %> <%= amount(a["amount_applied"]) %></td></tr><% end %></tbody></table></div>
+<% else %><p class="empty">Nothing applied yet.</p><% end %>
+<% end %>

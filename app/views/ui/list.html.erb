@@ -1,0 +1,22 @@
+<div class="pagehead">
+  <h1><%= @title %></h1>
+  <% if new %><a class="button primary" href="<%= new[0] %>"><%= new[1] %></a><% end %>
+</div>
+<% if rows.any? %>
+<div class="tablewrap">
+<table class="grid<%= ' clickable' if link %>">
+  <thead><tr><% columns.each do |c| %><th<%= raw(' class="num"') if c.numeric %>><%= c.label %></th><% end %></tr></thead>
+  <tbody>
+  <% rows.each do |r| %>
+  <tr>
+    <% columns.each_with_index do |c, i| %>
+    <td<%= raw(' class="num"') if c.numeric %>><% if i.zero? && link %><a href="<%= link.call(r) %>"><%= cell(c, c.value(r)) %></a><% else %><%= cell(c, c.value(r)) %><% end %></td>
+    <% end %>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+<% else %>
+<p class="empty"><%= empty %></p>
+<% end %>

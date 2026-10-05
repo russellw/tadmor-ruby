@@ -1,0 +1,10 @@
+<div class="pagehead"><h1><%= @title %></h1></div>
+<form method="post" class="card form">
+  <%= form_token_field %>
+  <p><%= question %></p>
+  <% if error %><p class="error" role="alert"><%= error %></p><% end %>
+  <div class="actions">
+    <button class="danger">Delete</button>
+    <a class="button" href="<%= back %>">Cancel</a>
+  </div>
+</form>

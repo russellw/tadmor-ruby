@@ -1,0 +1,50 @@
+<div class="pagehead"><h1>Home</h1><span class="sub">Today is <%= today.iso8601 %> (UTC)</span></div>
+
+<div class="actions mb-l">
+  <a class="button primary" href="/sales-invoices/new">New invoice</a>
+  <a class="button" href="/customer-payments/new">New customer payment</a>
+  <a class="button primary" href="/purchase-bills/new">New bill</a>
+  <a class="button" href="/supplier-payments/new">New supplier payment</a>
+  <a class="button" href="/sales-orders/new">New sales order</a>
+  <a class="button" href="/purchase-orders/new">New purchase order</a>
+</div>
+
+<div class="columns">
+  <% [["Receivables outstanding", receivables, "invoice"], ["Payables outstanding", payables, "bill"]].each do |heading, rows, noun| %>
+  <section class="card">
+    <h2 class="mt-0"><%= heading %></h2>
+    <% rows.each do |r| %>
+    <p><span class="big"><%= r["currency_code"] %> <%= amount(r["total"]) %></span><br>
+      <span class="muted"><%= pluralize(r["n"], noun) %>, overdue <%= r["currency_code"] %> <%= amount(r["overdue"]) %></span></p>
+    <% end %>
+    <% if rows.empty? %><p class="muted">Nothing outstanding.</p><% end %>
+  </section>
+  <% end %>
+  <section class="card">
+    <h2 class="mt-0">Work in progress</h2>
+    <dl class="facts">
+      <dt><a href="/sales-orders">Open sales orders</a></dt><dd><%= counts[:sales_orders] %></dd>
+      <dt><a href="/purchase-orders">Open purchase orders</a></dt><dd><%= counts[:purchase_orders] %></dd>
+      <dt><a href="/sales-invoices">Draft invoices</a></dt><dd><%= counts[:draft_invoices] %></dd>
+      <dt><a href="/purchase-bills">Draft bills</a></dt><dd><%= counts[:draft_bills] %></dd>
+    </dl>
+  </section>
+</div>
+
+<div class="columns">
+  <% [["Most overdue invoices", "/reports/ar-aging", "AR aging", overdue, "Invoice", "Customer", "/sales-invoices", "No overdue invoices."],
+      ["Bills due in the next 14 days", "/reports/ap-aging", "AP aging", due_soon, "Bill", "Supplier", "/purchase-bills", "No bills due soon."]].each do |heading, report, report_name, rows, doc, party, base, none| %>
+  <section>
+    <h2><%= heading %> <a class="muted plain small" href="<%= report %>"><%= report_name %></a></h2>
+    <% if rows.any? %>
+    <div class="tablewrap"><table class="grid">
+      <thead><tr><th><%= doc %></th><th><%= party %></th><th>Due</th><th class="num">Balance</th></tr></thead>
+      <tbody><% rows.each do |b| %><tr>
+        <td><a href="<%= base %>/<%= b["id"] %>"><%= b["number"] %></a></td>
+        <td><%= b["party"] %></td><td><%= b["due_date"].iso8601 %></td>
+        <td class="num"><%= b["currency_code"] %> <%= amount(b["balance"]) %></td></tr><% end %></tbody>
+    </table></div>
+    <% else %><p class="empty"><%= none %></p><% end %>
+  </section>
+  <% end %>
+</div>

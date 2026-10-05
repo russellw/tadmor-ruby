@@ -1,0 +1,32 @@
+<div class="pagehead">
+  <h1>Periods and year-end</h1>
+  <div class="actions"><a class="button primary" href="/fiscal-years/new">New fiscal year</a>
+    <a class="button" href="/accounting-periods/new">New period</a></div>
+</div>
+<% if current_user.is_admin && (closable || reopenable) %>
+<div class="card mb">
+  <strong>Year-end</strong>
+  <div class="actions mt-s">
+    <% if closable %><a class="button" href="/fiscal-years/<%= closable.id %>/close">Close <%= closable.name %>…</a><% end %>
+    <% if reopenable %><%= action_button "Reopen #{reopenable.name}", "/fiscal-years/#{reopenable.id}/reopen" %><% end %>
+  </div>
+  <% if year_error %><p class="error" role="alert"><%= year_error %></p><% end %>
+</div>
+<% end %>
+<% years.each do |year, periods| %>
+<h2><a href="/fiscal-years/<%= year.id %>"><%= year.name %></a>
+  <span class="muted plain"><%= year.start_date.iso8601 %> to <%= year.end_date.iso8601 %></span>
+  <%= pill(year.status) %></h2>
+<% if periods.any? %>
+<div class="tablewrap"><table class="grid">
+  <thead><tr><th>Period</th><th>From</th><th>To</th><th>Status</th><th></th></tr></thead>
+  <tbody><% periods.each do |p| %><tr>
+    <td><a href="/accounting-periods/<%= p.id %>"><%= p.name %></a></td><td><%= p.start_date.iso8601 %></td><td><%= p.end_date.iso8601 %></td>
+    <td><%= pill(p.status) %></td>
+    <td><%= action_button p.status == "open" ? "Close" : "Reopen", "/accounting-periods/#{p.id}/toggle", "link" %>
+      <% if (e = errors["period-#{p.id}"]) %><p class="error" role="alert"><%= e %></p><% end %>
+    </td></tr><% end %></tbody>
+</table></div>
+<% else %><p class="empty">No periods yet. Posting into this year creates monthly periods as needed.</p><% end %>
+<% end %>
+<% if years.empty? %><p class="empty">No fiscal years yet. Create one before posting anything.</p><% end %>

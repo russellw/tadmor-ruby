@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= @title %> · Tadmor</title>
+<link rel="stylesheet" href="/app.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<% if current_user %>
+<input type="checkbox" id="navtoggle" class="navtoggle" aria-hidden="true">
+<header class="topbar">
+  <label for="navtoggle" class="navbutton">Menu</label>
+  <a class="brand" href="/">Tadmor</a>
+  <div class="who">
+    <span><%= current_user.full_name %><% if current_user.is_admin %> <span class="tag">admin</span><% end %></span>
+    <form method="post" action="/logout"><%= form_token_field %><button class="link">Sign out</button></form>
+  </div>
+</header>
+<div class="shell">
+  <nav class="sidebar" aria-label="Main">
+    <% nav_groups.each do |title, links| %>
+    <div class="navgroup">
+      <div class="navtitle"><%= title %></div>
+      <% links.each do |text, url, active| %><a href="<%= url %>"<% if active %> class="active" aria-current="page"<% end %>><%= text %></a><% end %>
+    </div>
+    <% end %>
+  </nav>
+  <main>
+    <%= yield %>
+  </main>
+</div>
+<% else %>
+<main class="bare"><%= yield %></main>
+<% end %>
+</body>
+</html>

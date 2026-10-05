@@ -1,0 +1,7 @@
+<% if current_user %>
+<h1><%= @title %></h1>
+<p><%= message %></p>
+<p><a href="/">Go to the home page</a></p>
+<% else %>
+<div class="card login"><h1><%= @title %></h1><p><%= message %></p><p><a href="/">Go to the home page</a></p></div>
+<% end %>

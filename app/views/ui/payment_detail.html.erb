@@ -1,0 +1,36 @@
+<% cur = p["currency_code"] %>
+<div class="pagehead"><h1><%= @title %> <%= pill(p["status"]) %></h1></div>
+<div class="columns">
+  <div class="card"><dl class="facts">
+    <dt><%= kind.sales ? "Customer" : "Supplier" %></dt><dd><%= party %></dd>
+    <dt>Date</dt><dd><%= p["payment_date"] %></dd>
+    <dt>Method</dt><dd><%= dash(label(p["method"])) %></dd>
+    <dt>Reference</dt><dd><%= dash(p["reference"]) %></dd>
+    <dt><%= cash_label %></dt><dd><%= dash(cash_account) %></dd>
+    <dt>Journal entry</dt><dd><% if p["journal_entry_id"] %><a href="/journal-entries/<%= p["journal_entry_id"] %>">Entry <%= p["journal_entry_id"] %></a><% else %>—<% end %></dd>
+  </dl></div>
+  <div class="card"><table class="totals full">
+    <tr><td><strong>Amount</strong></td><td class="num"><strong><%= cur %> <%= amount(p["amount"]) %></strong></td></tr>
+    <tr><td>Applied</td><td class="num"><%= cur %> <%= amount(p["amount_applied"]) %></td></tr>
+    <tr><td><strong>Unapplied</strong></td><td class="num"><strong><%= cur %> <%= amount(p["unapplied"]) %></strong></td></tr>
+  </table></div>
+</div>
+<h2>Actions</h2>
+<div class="card">
+  <div class="actions">
+  <% if p["status"] == "draft" %>
+    <%= action_button "Post", "/#{c}/#{p["id"]}/post", "primary" %>
+    <a class="button" href="/<%= c %>/<%= p["id"] %>/edit">Edit</a>
+    <a class="button" href="/<%= c %>/<%= p["id"] %>/delete">Delete</a>
+  <% elsif p["status"] == "posted" %>
+    <% if BigDecimal(p["unapplied"]).positive? %><%= action_button "Apply to open #{kind.sales ? 'invoices' : 'bills'}", "/#{c}/#{p["id"]}/apply", "primary" %><% end %>
+    <% if current_user.is_admin %><%= action_button "Unpost", "/#{c}/#{p["id"]}/unpost" %><% end %>
+  <% end %>
+  </div>
+  <%= render "ui/action_errors", errors: %>
+</div>
+<h2>Applied to</h2>
+<% if applications.any? %>
+<div class="tablewrap"><table class="grid"><thead><tr><th><%= kind.sales ? "Invoice" : "Bill" %></th><th class="num">Amount applied</th></tr></thead>
+<tbody><% applications.each do |a| %><tr><td><a href="<%= a["url"] %>"><%= a["document_number"] %></a></td><td class="num"><%= cur %> <%= amount(a["amount_applied"]) %></td></tr><% end %></tbody></table></div>
+<% else %><p class="empty">Not applied to anything yet.</p><% end %>

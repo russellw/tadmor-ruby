@@ -1,0 +1,2 @@
+class SalesCreditNoteLine < ApplicationRecord
+end

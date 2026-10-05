@@ -1,0 +1,65 @@
+<% cur = o["currency_code"] %>
+<div class="pagehead">
+  <h1><%= kind.label %> <%= o["order_number"] %> <%= pill(o["status"]) %></h1>
+  <a class="button" href="/api/<%= c %>/<%= o["id"] %>/pdf" target="_blank" rel="noopener">PDF</a>
+</div>
+<div class="columns">
+  <div class="card"><dl class="facts">
+    <dt><%= kind.sales ? "Customer" : "Supplier" %></dt><dd><%= party %></dd>
+    <dt>Order date</dt><dd><%= o["order_date"] %></dd>
+    <dt>Expected <%= kind.sales ? "ship" : "receipt" %></dt><dd><%= dash(o[kind.expected_date]) %></dd>
+    <dt>Currency</dt><dd><%= cur %></dd>
+    <dt><%= label(kind.billed) %></dt><dd><%= pill(o["#{kind.billed}_status"]) %></dd>
+    <dt><%= label(kind.moved) %></dt><dd><%= pill(o["#{kind.moved}_status"]) %></dd>
+    <dt>Reference</dt><dd><%= dash(o["reference"]) %></dd>
+    <dt>Memo</dt><dd><%= o["memo"].present? ? simple_format(o["memo"], {}, wrapper_tag: "span") : "—" %></dd>
+  </dl></div>
+  <div class="card"><table class="totals full">
+    <tr><td>Subtotal</td><td class="num"><%= cur %> <%= amount(subtotal) %></td></tr>
+    <tr><td>Tax</td><td class="num"><%= cur %> <%= amount(tax_total) %></td></tr>
+    <tr><td><strong>Total</strong></td><td class="num"><strong><%= cur %> <%= amount(o["total"]) %></strong></td></tr>
+  </table></div>
+</div>
+
+<h2>Actions</h2>
+<div class="card">
+  <div class="actions">
+  <% base = "/#{c}/#{o["id"]}" %>
+  <% if o["status"] == "draft" %>
+    <%= action_button "Confirm", "#{base}/confirm", "primary" %>
+    <a class="button" href="<%= base %>/edit">Edit</a>
+    <a class="button" href="<%= base %>/delete">Delete</a>
+    <%= action_button "Cancel order", "#{base}/cancel" %>
+  <% elsif o["status"] == "open" %>
+    <% if can_bill %><a class="button primary" href="<%= base %>/<%= kind.bill_verb %>"><%= kind.bill_verb.capitalize %></a><% end %>
+    <% if can_move %><a class="button primary" href="<%= base %>/<%= kind.move_verb %>"><%= kind.move_verb.capitalize %></a><% end %>
+    <%= action_button "Close", "#{base}/close" %>
+    <% unless fulfilled %><%= action_button "Cancel order", "#{base}/cancel" %><% end %>
+  <% end %>
+  </div>
+  <%= render "ui/action_errors", errors: %>
+  <%= render "ui/email_box", url: "#{base}/email", errors:, email_result: %>
+</div>
+
+<h2>Lines</h2>
+<div class="tablewrap"><table class="grid">
+  <thead><tr><th>#</th><th>Description</th><th class="num">Ordered</th><th class="num"><%= kind.sales ? "Unit price" : "Unit cost" %></th>
+    <th class="num">Tax %</th><th class="num">Total</th>
+    <th class="num"><%= kind.billed.capitalize %></th><th class="num">To <%= kind.bill_verb %></th>
+    <th class="num"><%= kind.moved.capitalize %></th><th class="num">To <%= kind.move_verb %></th></tr></thead>
+  <tbody><% lines.each do |l| %><tr>
+    <td><%= l["line_no"] %></td><td><%= l["description"] %></td><td class="num"><%= qty(l["quantity"]) %></td>
+    <td class="num"><%= amount(l[kind.lines.price]) %></td><td class="num"><%= qty(l["tax_rate"]) %></td><td class="num"><%= amount(l["line_total"]) %></td>
+    <td class="num"><%= qty(l["qty_#{kind.billed}"]) %></td><td class="num"><%= qty(l["qty_to_#{kind.bill_verb}"]) %></td>
+    <td class="num"><%= qty(l["qty_#{kind.moved}"]) %></td><td class="num"><%= qty(l["qty_to_#{kind.move_verb}"]) %></td>
+  </tr><% end %>
+  <% if lines.empty? %><tr><td colspan="10" class="empty">No lines.</td></tr><% end %></tbody>
+</table></div>
+
+<% if documents.any? || movements.any? %>
+<h2>Produced from this order</h2>
+<ul class="card plainlist">
+  <% documents.each do |d| %><li><a href="/<%= kind.document.collection %>/<%= d.id %>"><%= kind.sales ? "Invoice" : "Bill" %> <%= d[kind.document.number] %></a> <%= pill(d.status) %></li><% end %>
+  <% movements.each do |m| %><li><a href="/stock-movements/<%= m.id %>">Stock movement <%= m.id %></a> <%= m.movement_date.iso8601 %> <%= pill(m.journal_entry_id ? "posted" : "draft") %></li><% end %>
+</ul>
+<% end %>

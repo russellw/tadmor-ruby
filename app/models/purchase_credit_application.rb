@@ -1,0 +1,2 @@
+class PurchaseCreditApplication < ApplicationRecord
+end
